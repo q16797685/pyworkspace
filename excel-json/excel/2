@@ -1,0 +1,30 @@
+{
+   "name":"加工生产",
+   "type_name": "业务域",
+    "children":[
+     {
+        "type_name":"业务组件",
+         "name":"计划管理",
+        "children":[
+            {
+             "name":"湖南中烟SEM可视化综合管控系统行业采购管理信息子系统",
+             "type_name":"系统",
+              "children":[
+                   {
+                    "name":"需求管理",
+                    "type_name":"功能点",
+                    "dongdian":"困难"
+                   },
+                   {
+                    "name":"需求管理",
+                    "type_name":"功能点",
+                    "dongdian":"困难"
+                   }
+
+              ]
+            }
+       ]
+    }
+
+  ]
+}

@@ -1,0 +1,14 @@
+#fileName: api_config.yml
+
+host: http://192.168.100.253:8884
+
+login:
+  name: 登录账户
+  method: post
+  url: /api/login
+  data:
+    username: 3870
+    password: 68e0b554c4828b7f19c8507e4c091aa42472ff01
+  headers:
+    X-Ajax-Req: 1
+    Content-Type: application/json;charset=UTF-8
