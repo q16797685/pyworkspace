@@ -1,7 +1,7 @@
 #!/bin/python3
 # -*- encoding:utf-8 -*-
 
-
+# TODO 获取excel表数据
 """获取excel表数据"""
 
 
@@ -35,45 +35,26 @@ class OperationExcel:
             self.file_path = os.path.join(_testcase_path, 'workstation.xls')
             self.sheet_name = 'workstation'
 
+        # TODO Excel打开
         self.wb = xlrd.open_workbook(self.file_path)
+        # TODO Excel表空间
         self.sheet = self.wb.sheet_by_index(0)
+        # TODO Excel表头
+        self.keys = self.sheet.row_values(0)
+        # TODO Excel行数
+        self.rows = self.sheet.nrows
+        # TODO Excel列数
+        self.colums = self.sheet.ncols
+
 
     def get_excel_data(self):
         data = []
-        title = self.sheet.row_values(0)
         for row in range(1,self.sheet.nrows):
             row_value = self.sheet.row_values(row)
-            data.append(dict(zip(title,row_value)))
+            data.append(dict(zip(self.keys,row_value)))
         return data
 
-    #     self.wb = openpyxl.load_workbook(self.file_path)
-    #     self.sheet = self.wb[self.sheet_name]
-    #     self.ncoles = self.sheet.max_column
-    #     self.nrows = self.sheet.max_row
-    #
-    # def cell_value(self, row=1, column=1):
-    #     return self.sheet.cell(row, column).value
-    #
-    # def get_title(self):
-    #     title = []
-    #     for column in range(1, self.ncoles + 1):
-    #         title.append(self.cell_value(1, column))
-    #     return title
-    #
-    # def get_excel_data(self):
-    #     finally_data = []
-    #     for row in range(2, self.nrows):
-    #         result_dict = {}
-    #         for column in range(1, self.ncoles + 1):
-    #             result_dict[self.get_title()[column - 1]] = self.cell_value(row, column)
-    #         finally_data.append(result_dict)
-    #     print(finally_data[0]['parameter'])
-    #     return finally_data
 
 
 if __name__ == '__main__':
     r = OperationExcel()
-    d = ExcelVarles()
-    print(d.case_Headers)
-    for i in r.get_excel_data():
-        print(i['请求头'])
