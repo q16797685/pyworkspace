@@ -11,6 +11,7 @@ import json
 
 class RunTest:
 
+#   TODO    初始化类方法
     def __init__(self):
         self.data = OperationExcel()
         self.header_informations = ExcelVarles()
@@ -22,16 +23,28 @@ class RunTest:
         for i in range(0, rows_count-1):
             is_run =  self.data.get_excel_data()[i]
             if is_run:
+                run_id = is_run[self.header_informations.case_Id]
                 run_method = is_run[self.header_informations.case_Method]
                 run_url = is_run[self.header_informations.case_Url]
                 run_headers = is_run[self.header_informations.case_Headers]
                 run_data = is_run[self.header_informations.case_Data]
-                case = {'method': run_method,
-                        'url': self.readConfig.get_login('baseurl') + run_url,
-                        'headers': json.loads(run_headers),
-                        'parameter': run_data}
-                response = BaseRequests(case).get_response()
-                print('test %s' % response.text)
+                if run_id == 'case_001':
+                    case_login = {'method': run_method,
+                            'url': self.readConfig.get_login('baseurl') + run_url,
+                            'headers': json.loads(run_headers),
+                            'parameter': run_data}
+                    response = BaseRequests(case_login).get_response()
+                    token = response.json()['data']['token']
+                    token_headers = {"Authorization":token}
+                    print('test %s' % response.json()['data']['token'])
+                else:
+                    case = {'method': run_method,
+                            'url': self.readConfig.get_login('baseurl') + run_url,
+                            'headers': token_headers,
+                            'parameter': run_data}
+                    response = BaseRequests(case).get_response()
+                    print('test %s' % response.json())
+
 
 
 if __name__ == '__main__':

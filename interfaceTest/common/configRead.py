@@ -9,8 +9,8 @@ import configparser
 
 class ReadConfig:
 
+#   TODO 初始化读取配置文件方法
     def __init__(self):
-        #fd = open(_config_path, encoding='utf-8')
 
         self.cf = configparser.ConfigParser()
         self.cf.read(_config_path, encoding="utf-8")
