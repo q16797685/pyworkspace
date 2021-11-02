@@ -26,7 +26,7 @@ class BaseRequests:
     def run_main(self):
         method = self.case['method']
         url = self.case['url']
-     #   url = self.base_url + self.case['url']
+        headers = self.case['headers']
         if self.case['parameter']:
             data = eval(self.case['parameter'])
         else:
@@ -36,15 +36,15 @@ class BaseRequests:
         res = ''
         if method.upper() == 'POST':
             try:
-                res = s.request(method='post', url=url, data=json.dumps(data), headers=self.headers)
-                print('test' %res)
+                res = s.request(method='post', url=url, data=json.dumps(data), headers=headers)
+                print('test111 %s' % res.json()['data']['token'])
             except Exception as e:
-                print('test post')
+                print('why post')
         elif method.upper() == 'GET':
             try:
-                res = s.request(method='get', url=url, data=json.dumps(data), headers=self.headers)
+                res = s.request(method='get', url=url, data=json.dumps(data), headers=headers)
             except Exception as e:
-                print('test get')
+                print('why get')
         else:
             raise ValueError('method方法为get和post')
         return res
@@ -52,6 +52,7 @@ class BaseRequests:
     def get_response(self):
         response_run = self.run_main()
         return response_run
+
 
 if __name__ =='__main__':
     readConfig = ReadConfig()
@@ -65,7 +66,10 @@ if __name__ =='__main__':
             run_url = is_run[header_informations.case_Url]
             run_headers = is_run[header_informations.case_Headers]
             run_data = is_run[header_informations.case_Data]
-            case = {'method': testCase[i]['请求方法'], 'headers': testCase[i]['请求头'], 'url': readConfig.get_login('baseurl') + testCase[i]['接口地址'],
-            'parameter': testCase[i]['请求参数']}
+            case = {'method': run_method,
+                    'url': readConfig.get_login('baseurl') + run_url,
+                    'headers': json.loads(run_headers),
+                    'parameter': run_data}
+            print(case)
             response = BaseRequests(case).get_response()
             print(response.text)

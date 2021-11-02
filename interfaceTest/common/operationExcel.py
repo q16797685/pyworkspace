@@ -5,7 +5,7 @@
 """获取excel表数据"""
 
 
-import openpyxl
+import json
 import xlrd
 import os
 from interfaceTest.base.base_path import _testcase_path
@@ -56,5 +56,8 @@ class OperationExcel:
 
 
 
-if __name__ == '__main__':
-    r = OperationExcel()
+# if __name__ == '__main__':
+#     r = OperationExcel()
+    # a = r.get_excel_data()[0]['请求头']
+    # b = json.loads(a)
+    # print(b)

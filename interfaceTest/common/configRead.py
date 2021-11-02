@@ -15,18 +15,13 @@ class ReadConfig:
         self.cf = configparser.ConfigParser()
         self.cf.read(_config_path, encoding="utf-8")
 
+#    TODO 获取[Login]配置文件信息
     def get_login(self, name):
         values = self.cf.get("Login", name)
         return values
 
+#    TODO 获取[DATABASE]配置文件信息
     def get_database(self, name):
         values = self.cf.get("DATABASE", name)
         return values
 
-
-# cf = configparser.ConfigParser()
-# cf.read("E:\pyworkspace\interfaceTest\config\config.ini",encoding="utf-8")
-# print(cf.items('DATABASE'))
-
-# test = ReadConfig()
-# print(type(test.get_login('Content-Type')))
