@@ -6,6 +6,7 @@ from interfaceTest.base.base_requests import BaseRequests
 from interfaceTest.common.operationExcel import OperationExcel
 from interfaceTest.common.operationExcel import ExcelVarles
 from interfaceTest.common.configRead import ReadConfig
+from interfaceTest.base.baseLogin import BaseLogin
 import json
 
 global token_headers
@@ -18,6 +19,7 @@ class RunTest:
         self.data = OperationExcel()
         self.header_information = ExcelVarles()
         self.readConfig = ReadConfig()
+        self.loginToken = BaseLogin()
 
     #   TODO 运行主方法
     def go_on_run(self):
@@ -36,10 +38,8 @@ class RunTest:
                 run_url = is_run[self.header_information.case_Url]
                 run_headers = is_run[self.header_information.case_Headers]
                 run_data = is_run[self.header_information.case_Data]
-                print(run_data)
                 run_status_code = is_run[self.header_information.case_Result]
                 run_parameter = is_run[self.header_information.case_Parameter]
-                print(run_parameter)
                 if run_id == 'case_001':
                     case_login = {'method': run_method,
                                   'url': self.readConfig.get_login('baseurl') + run_url,
@@ -58,10 +58,11 @@ class RunTest:
                     # print('department is %s' % token_department[1]['id'])
                 else:
                     case = {'method': run_method,
-                            'url': self.readConfig.get_login('baseurl') + run_url,
+                            'url': self.readConfig.get_login('baseurl') + run_url + run_parameter,
                             'headers': token_headers,
                             'parameter': run_data}
                     response = BaseRequests(case).get_response()
+                    print(case)
                     print('test %s' % response.json())
 
 

@@ -19,10 +19,13 @@ class BaseLogin:
         api = self.readConfig.get_login('api')
         username = self.readConfig.get_login('username')
         password = self.readConfig.get_login('password')
-        data = {'username':username,'password':password}
+        data = {'username': username, 'password': password}
         res = s.post(url + api, json.dumps(data))
-        token_headers = {"Authorization": res.json()['data']['token']}
-        return res
+        token = res.json()['data']['token']
+        token_headers = {"Content-Type": "application/json;charset=UTF-8",
+                         "X-Ajax-Req": "1",
+                         "Authorization": token}
+        return token_headers
 
 
 if __name__ == '__main__':
