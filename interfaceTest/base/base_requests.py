@@ -42,7 +42,7 @@ class BaseRequests:
                 print('why post')
         elif method.upper() == 'GET':
             try:
-                res = s.request(method='get', url=url, data=json.dumps(data), headers=headers)
+                res = s.request(method='get', url=url, data=data, headers=headers)
             except Exception as e:
                 print('why get')
         else:

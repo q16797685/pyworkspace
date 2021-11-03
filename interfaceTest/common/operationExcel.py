@@ -5,7 +5,6 @@
 """获取excel表数据"""
 
 
-import json
 import xlrd
 import os
 from interfaceTest.base.base_path import _testcase_path
@@ -19,6 +18,7 @@ class ExcelVarles:
     case_Method = '请求方法'
     case_Type = '请求类型'
     case_Headers = '请求头'
+    case_Parameter = '参数'
     case_Data = '请求参数'
     case_Code = '状态码'
     case_Result = '期望结果'
@@ -45,7 +45,6 @@ class OperationExcel:
         self.rows = self.sheet.nrows
         # TODO Excel列数
         self.colums = self.sheet.ncols
-
 
     def get_excel_data(self):
         data = []
