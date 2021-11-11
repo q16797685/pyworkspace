@@ -1,5 +1,6 @@
 #!/bin/python3
 # -*- encoding:utf-8 -*-
+# TODO 主方法类
 
 
 from interfaceTest.base.base_requests import BaseRequests
@@ -7,6 +8,7 @@ from interfaceTest.common.operationExcel import OperationExcel
 from interfaceTest.common.operationExcel import ExcelVarles
 from interfaceTest.common.configRead import ReadConfig
 from interfaceTest.base.baseLogin import BaseLogin
+from interfaceTest.base import base_data
 import json
 
 global token_headers
@@ -20,6 +22,7 @@ class RunTest:
         self.header_information = ExcelVarles()
         self.readConfig = ReadConfig()
         self.loginToken = BaseLogin()
+        self.patient = base_data
 
     #   TODO 运行主方法
     def go_on_run(self):
@@ -44,25 +47,41 @@ class RunTest:
                     case_login = {'method': run_method,
                                   'url': self.readConfig.get_login('baseurl') + run_url,
                                   'headers': json.loads(run_headers),
-                                  'parameter': run_data}
+                                  'parameter': json.loads(run_data)}
                     response = BaseRequests(case_login).get_response()
                 #   TODO 获取返回体json信息中token字段
-                    token_headers = {"Authorization": response.json()['data']['token']}
+                    token_headers = {"Authorization": response.json()['data']['token'],
+                                     "Content-Type": "application/json;charset=UTF-8",
+                                     "X-Ajax-Req": "1"}
                 elif run_id == 'case_002':
                     case_department = {'method': run_method,
                                        'url': self.readConfig.get_login('baseurl') + run_url,
                                        'headers': token_headers,
                                        'parameter': run_data}
                     response = BaseRequests(case_department).get_response()
-                    token_department = response.json()['data']
-                    # print('department is %s' % token_department[1]['id'])
+                # TODO 下诊断
+                elif run_id == 'case_010':
+                    case_diagnosis = {'method': run_method,
+                                      'url': self.readConfig.get_login('baseurl') + run_url,
+                                      'headers': token_headers,
+                                      'parameter': self.patient.diagnosis_information}
+                    response = BaseRequests(case_diagnosis).get_response()
+                # TODO 开医嘱
+                elif run_id == 'case_011':
+                    case_order = {'method': run_method,
+                                  'url': self.readConfig.get_login('baseurl') + run_url,
+                                  'headers': token_headers,
+                                  'parameter': self.patient.order_submit_information}
+                    response = BaseRequests(case_order).get_response()
+                    print(case_order)
+                    print(response.json())
                 else:
                     case = {'method': run_method,
                             'url': self.readConfig.get_login('baseurl') + run_url + run_parameter,
                             'headers': token_headers,
-                            'parameter': run_data}
+                            'parameter': self.patient.order_submit_information}
                     response = BaseRequests(case).get_response()
-                    print(case)
+                    print(response.json())
                     print('test %s' % response.json())
 
 

@@ -27,11 +27,12 @@ class BaseRequests:
         method = self.case['method']
         url = self.case['url']
         headers = self.case['headers']
-        if self.case['parameter']:
-            # TODO 字符串转化成字典类型eval函数
-            data = eval(self.case['parameter'])
-        else:
-            data = None
+        data = self.case['parameter']
+        # if self.case['parameter']:
+        #     # TODO 字符串转化成字典类型eval函数
+        #     data = eval(self.case['parameter'])
+        # else:
+        #     data = None
 
         s = requests.session()
         res = ''
