@@ -13,7 +13,7 @@ choice_int = random.randint(0, len(patient_base_information.get_login_token()))
 
 for patient_information in patient_base_information.get_login_token():
     patient_id = patient_information['patientId']
-    encount_id = patient_information['encounterId']
+    encounter_id = patient_information['encounterId']
     reservation_id = patient_information['id']
 
 diagnosis_information = {"diagnosis": diagnosis_base_information.get_diagnosis_information()[choice_int][1],
@@ -24,7 +24,7 @@ diagnosis_information = {"diagnosis": diagnosis_base_information.get_diagnosis_i
                          "priority": 1}
 
 order_submit_information = {"id":"null",
-                            "encounterId": encount_id,
+                            "encounterId": encounter_id,
                             "itemList":[
                                 {"name":"碳酸钙维生素D3片",
                                  "fullName":"碳酸钙/维生素D3片[钙尔奇D][600mg*30]",
