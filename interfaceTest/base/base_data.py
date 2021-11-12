@@ -5,7 +5,6 @@
 from interfaceTest.base.baseLogin import BaseLogin
 from interfaceTest.common.readData import ReadDataBase
 import random
-# import requests
 
 diagnosis_base_information = ReadDataBase()
 patient_base_information = BaseLogin()

@@ -9,6 +9,7 @@ from interfaceTest.common.operationExcel import ExcelVarles
 from interfaceTest.common.configRead import ReadConfig
 from interfaceTest.base.baseLogin import BaseLogin
 from interfaceTest.base import base_data
+from interfaceTest.base.base_path import *
 import json
 
 global token_headers
@@ -51,6 +52,7 @@ class RunTest:
                                   'headers': json.loads(run_headers),
                                   'parameter': json.loads(run_data)}
                     response = BaseRequests(case_login).get_response()
+                    assert response.status_code == 200
                     #  TODO 获取返回体json信息中token字段
                     token_headers = {"Authorization": response.json()['data']['token'],
                                      "Content-Type": "application/json;charset=UTF-8",
@@ -87,6 +89,3 @@ class RunTest:
                     print('test %s' % response.json())
 
 
-if __name__ == '__main__':
-    r = RunTest()
-    r.go_on_run()
