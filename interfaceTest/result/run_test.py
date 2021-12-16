@@ -33,6 +33,7 @@ class RunTest:
         #   TODO 定义excel中行数据
         rows_count = self.data.rows
         #   TODO 遍历每个行数字段数据
+        item = []
         for i in range(0, rows_count - 1):
             is_run = self.data.get_excel_data()[i]
             if is_run:
@@ -43,7 +44,6 @@ class RunTest:
                 run_headers = is_run[self.header_information.case_Headers]
                 run_data = is_run[self.header_information.case_Data]
                 run_name = is_run[self.header_information.case_Name]
-                run_status_code = is_run[self.header_information.case_Result]
                 run_parameter = is_run[self.header_information.case_Parameter]
                 #   TODO 登录接口
                 if run_id == 'case_001':
@@ -52,7 +52,7 @@ class RunTest:
                                   'headers': json.loads(run_headers),
                                   'parameter': json.loads(run_data)}
                     response = BaseRequests(case_login).get_response()
-                    assert response.status_code == 200
+                    item.append(response.json())
                     #  TODO 获取返回体json信息中token字段
                     token_headers = {"Authorization": response.json()['data']['token'],
                                      "Content-Type": "application/json;charset=UTF-8",
@@ -64,28 +64,34 @@ class RunTest:
                                        'headers': token_headers,
                                        'parameter': run_data}
                     BaseRequests(case_department).get_response()
+                    item.append(BaseRequests(case_department).get_response().json())
                 # TODO 下诊断
                 elif run_name == '下诊断':
                     case_diagnosis = {'method': run_method,
                                       'url': self.readConfig.get_login('baseurl') + run_url,
                                       'headers': token_headers,
                                       'parameter': self.patient.diagnosis_information}
-                    BaseRequests(case_diagnosis).get_response()
-                # TODO 开医嘱
-                elif run_name == '开医嘱':
-                    case_order = {'method': run_method,
-                                  'url': self.readConfig.get_login('baseurl') + run_url,
-                                  'headers': token_headers,
-                                  'parameter': self.patient.order_submit_information}
-                    response = BaseRequests(case_order).get_response()
-                    print(response.json())
-                #   TODO 其他用例
+                    item.append(BaseRequests(case_diagnosis).get_response().json())
+                # # TODO 开医嘱
+                # elif run_name == '开医嘱':
+                #     case_order = {'method': run_method,
+                #                   'url': self.readConfig.get_login('baseurl') + run_url,
+                #                   'headers': token_headers,
+                #                   'parameter': self.patient.order_submit_information}
+                #     response_order = BaseRequests(case_order).get_response()
+                #     assert response_order.status_code == 200
+                # #   TODO 其他用例
                 else:
                     case = {'method': run_method,
                             'url': self.readConfig.get_login('baseurl') + run_url + run_parameter,
                             'headers': token_headers,
                             'parameter': self.patient.order_submit_information}
-                    response = BaseRequests(case).get_response()
-                    print('test %s' % response.json())
+                    response_case = BaseRequests(case).get_response()
+                    item.append(response_case.json())
+        return item
 
+
+if __name__ == '__main__':
+    a = RunTest()
+    a.go_on_run()
 

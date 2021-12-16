@@ -1,25 +1,22 @@
 #!/bin/python3
 # -*- encoding:utf-8 -*-
+# TODO pytest方法
 
 
-import requests
-import json
-import xlrd
-import xlwt
+import pytest,os
+from interfaceTest.result.run_test import RunTest
+from interfaceTest.base.base_path import _report_path
+rc = RunTest().go_on_run()
 
 
-s = requests.session()
-b = s.request(method='POST',
-              url='http://192.168.100.253:8884/api/login/',
-              data=json.dumps({'username': 3870, "password": "68e0b554c4828b7f19c8507e4c091aa42472ff01"}),
-              headers={"X-Ajax-Req":"1"})
+print(dir)
+@pytest.mark.parametrize('data',rc)
+def test_name(data):
+    print(data)
 
 
-wb = xlrd.open_workbook('E:/pyworkspace/interfaceTest/testCase/workstation.xls')
-table = wb.sheet_by_index(0)
-data = []
-title = table.row_values(0)
-for row in range(1,table.nrows):
-    row_value = table.row_values(row)
-    data.append(dict(zip(title,row_value)))
-print(data)
+
+if __name__ == '__main__':
+    pytest.main(['--alluredir', _report_path+'/result', 'test.py'])
+    split = 'allure ' + 'generate ' + _report_path+'/result ' + '-o ' + _report_path+'/result/html --clean'
+    os.system(split)

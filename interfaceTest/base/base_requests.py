@@ -9,7 +9,6 @@ from interfaceTest.common.operationExcel import ExcelVarles
 import json
 
 
-
 class BaseRequests:
 
     # TODO 初始化request请求默认参数
@@ -55,3 +54,7 @@ class BaseRequests:
         response_run = self.run_main()
         return response_run
 
+
+if __name__ == '__main__':
+    r = OperationExcel()
+    test = r.get_case_data()

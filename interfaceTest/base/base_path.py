@@ -12,7 +12,7 @@ os.path.dirname(os.path.dirname(__file__))      # TODO 获取当前目录的上�
 _root_path = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
 
 # TODO 报告路径
-_report_path = os.path.join(_root_path,'report', 'report.html')
+_report_path = os.path.join(_root_path,'report')
 
 # TODO 配置文件路径
 _config_path = os.path.join(_root_path, 'config', 'config.ini')

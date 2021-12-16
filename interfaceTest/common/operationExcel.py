@@ -8,6 +8,7 @@
 import xlrd
 import os
 from interfaceTest.base.base_path import _testcase_path
+import json,pytest
 
 
 class ExcelVarles:
@@ -46,17 +47,25 @@ class OperationExcel:
         # TODO Excel列数
         self.colums = self.sheet.ncols
 
+    # TODO 获取excel每行数据
     def get_excel_data(self):
         data = []
-        for row in range(1,self.sheet.nrows):
+        for row in range(1, self.sheet.nrows):
             row_value = self.sheet.row_values(row)
-            data.append(dict(zip(self.keys,row_value)))
+            data.append(dict(zip(self.keys, row_value)))
         return data
 
+    # def get_excel_list_data(self):
+    #     #   TODO 定义excel中行数据
+    #     # rows_count = self.rows
+    #     #   TODO 遍历每个行数字段数据
+    #     for i in range(0, self.rows - 1):
+    #         return OperationExcel().get_excel_data()[i]
 
 
 # if __name__ == '__main__':
 #     r = OperationExcel()
-    # a = r.get_excel_data()[0]['请求头']
-    # b = json.loads(a)
-    # print(b)
+#     test1 = r.get_excel_data()
+#     test = r.get_excel_list_data()
+#     print(test)
+

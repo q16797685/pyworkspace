@@ -5,7 +5,6 @@
 import requests
 from interfaceTest.common.configRead import ReadConfig
 import json
-import datetime
 import time
 
 
@@ -35,7 +34,7 @@ class BaseLogin:
                         "firstVisitFlag": "1",
                         "visitDate": visit_date,
                         "patientId": "40288f86-6dd283e0-016d-d91c4c69-0001"}
-       # s.post(url + "/api/emr/reservation/add", headers=token_headers, json=patient_data)
+        s.post(url + "/api/emr/reservation/add", headers=token_headers, json=patient_data)
         patient_dict_data = s.get(url + "/api/api/dw/v2/outpatient/clinic/patient/search?pageNo=1&pageSize=10&patientName=&total=1&status=1", headers=token_headers)
         patient_data = patient_dict_data.json()['results']
         return patient_data

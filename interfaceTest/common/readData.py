@@ -25,7 +25,15 @@ class ReadDataBase:
         results = connect_mysql.fetchall()
         return results
 
+    def get_patient_information(self):
+        connect_mysql = self.connect.cursor()
+        sql = "SELECT id from PT_PATIENT limit 100"
+        connect_mysql.execute(sql)
+        results = connect_mysql.fetchall()
+        print(results[0])
+
 
 if __name__ == '__main__':
     r = ReadDataBase()
     r.get_diagnosis_information()
+    r.get_patient_information()
