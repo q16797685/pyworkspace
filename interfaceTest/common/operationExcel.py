@@ -45,7 +45,7 @@ class OperationExcel:
         # TODO Excel行数
         self.rows = self.sheet.nrows
         # TODO Excel列数
-        self.colums = self.sheet.ncols
+        self.columns = self.sheet.ncols
 
     # TODO 获取excel每行数据
     def get_excel_data(self):
@@ -55,6 +55,39 @@ class OperationExcel:
             data.append(dict(zip(self.keys, row_value)))
         return data
 
+    # TODO 获取某个单元格写入数据
+    def get_value(self,rows,columns):
+        values = self.sheet.cell_value(rows,columns)
+        return values
+
+    # TODO 获取每个列第一行的标题
+    def get_case_Id(self):
+        return ExcelVarles.case_Id
+
+    def get_case_Name(self):
+        return ExcelVarles.case_Name
+
+    def get_case_Url(self):
+        return ExcelVarles.case_Url
+
+    def get_case_Method(self):
+        return ExcelVarles.case_Method
+
+    def get_case_Headers(self):
+        return ExcelVarles.case_Headers
+
+    def get_case_Parameter(self):
+        return ExcelVarles.case_Parameter
+
+    def get_case_Data(self):
+        return ExcelVarles.case_Data
+
+    def get_case_Code(self):
+        return ExcelVarles.case_Code
+
+    def get_case_Result(self):
+        return ExcelVarles.case_Result
+
     # def get_excel_list_data(self):
     #     #   TODO 定义excel中行数据
     #     # rows_count = self.rows
@@ -63,9 +96,8 @@ class OperationExcel:
     #         return OperationExcel().get_excel_data()[i]
 
 
-# if __name__ == '__main__':
-#     r = OperationExcel()
-#     test1 = r.get_excel_data()
-#     test = r.get_excel_list_data()
-#     print(test)
+if __name__ == '__main__':
+    r = OperationExcel()
+    test = r.get_value(2,5)
+    print(test)
 

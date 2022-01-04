@@ -2,21 +2,23 @@
 # -*- encoding:utf-8 -*-
 
 
-from interfaceTest.base.baseLogin import BaseLogin
+from interfaceTest.base.base_login import BaseLogin
 from interfaceTest.common.readData import ReadDataBase
 import random
 
-diagnosis_base_information = ReadDataBase()
+diagnosis_db_information = ReadDataBase()
 patient_base_information = BaseLogin()
-choice_int = random.randint(0, len(patient_base_information.get_login_token()))
+patient_list = patient_base_information.get_all_patient().json()['results']
+choice_int = random.randint(0, len(patient_base_information.get_all_patient().json()['results']))
 
-for patient_information in patient_base_information.get_login_token():
+for patient_information in patient_list:
+    print(patient_information)
     patient_id = patient_information['patientId']
     encounter_id = patient_information['encounterId']
     reservation_id = patient_information['id']
 
-diagnosis_information = {"diagnosis": diagnosis_base_information.get_diagnosis_information()[choice_int][1],
-                         "diagnosisId": diagnosis_base_information.get_diagnosis_information()[choice_int][0],
+diagnosis_information = {"diagnosis": diagnosis_db_information.get_diagnosis_information()[choice_int][1],
+                         "diagnosisId": diagnosis_db_information.get_diagnosis_information()[choice_int][0],
                          "diagnosisType": "1",
                          "remarks": "null",
                          "resId": reservation_id,
@@ -68,6 +70,4 @@ order_submit_information = {"id":"null",
                                  "treatmentDays":1,
                                  "targetHisLocCode":"null",
                                  "targetHisLocName":"null"}],"remarks":"null"}
-
-
 

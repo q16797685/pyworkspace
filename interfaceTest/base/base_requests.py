@@ -37,6 +37,7 @@ class BaseRequests:
         res = ''
         if method.upper() == 'POST':
             try:
+            #   TODO header必须传字典类型，data数据必须传字符串类型
                 res = s.request(method='post', url=url, data=json.dumps(data), headers=headers)
             except Exception as e:
                 print('why post')
@@ -55,6 +56,10 @@ class BaseRequests:
         return response_run
 
 
-if __name__ == '__main__':
-    r = OperationExcel()
-    test = r.get_case_data()
+# if __name__ == '__main__':
+#     case = {'method': 'POST',
+#             'url': "http://192.168.100.253:8884/api/login",
+#             'headers': {"X-Ajax-Req":"1"},
+#             'parameter': {"username":"3870","password":"68e0b554c4828b7f19c8507e4c091aa42472ff01"}}
+#     r = BaseRequests(case)
+#     print(r.get_response().json())

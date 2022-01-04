@@ -2,7 +2,6 @@
 # -*- encoding:utf-8 -*-
 
 
-from interfaceTest.base.method import RunMethod
 import requests
 
 

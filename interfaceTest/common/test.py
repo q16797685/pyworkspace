@@ -9,10 +9,10 @@ from interfaceTest.base.base_path import _report_path
 rc = RunTest().go_on_run()
 
 
-print(dir)
 @pytest.mark.parametrize('data',rc)
 def test_name(data):
-    print(data)
+    return data
+    # assert 200 == data
 
 
 
