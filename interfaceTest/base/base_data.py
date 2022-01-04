@@ -12,7 +12,6 @@ patient_list = patient_base_information.get_all_patient().json()['results']
 choice_int = random.randint(0, len(patient_base_information.get_all_patient().json()['results']))
 
 for patient_information in patient_list:
-    print(patient_information)
     patient_id = patient_information['patientId']
     encounter_id = patient_information['encounterId']
     reservation_id = patient_information['id']

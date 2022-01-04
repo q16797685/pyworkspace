@@ -9,8 +9,6 @@ from interfaceTest.common.operationExcel import ExcelVarles
 from interfaceTest.common.configRead import ReadConfig
 from interfaceTest.base.base_login import BaseLogin
 from interfaceTest.base import base_data
-from interfaceTest.base.base_path import *
-import json
 
 global token_headers
 
