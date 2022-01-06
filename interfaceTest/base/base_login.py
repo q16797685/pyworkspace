@@ -64,7 +64,7 @@ class BaseLogin:
         patient_dict_data = BaseRequests(case).run_main()
         return patient_dict_data
 
-if __name__ == '__main__':
-    r = BaseLogin()
-    print(r.get_add_patient())
+# if __name__ == '__main__':
+#     r = BaseLogin()
+#     print(r.get_add_patient())
 

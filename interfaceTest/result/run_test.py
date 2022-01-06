@@ -9,6 +9,7 @@ from interfaceTest.common.operationExcel import ExcelVarles
 from interfaceTest.common.configRead import ReadConfig
 from interfaceTest.base.base_login import BaseLogin
 from interfaceTest.base import base_data
+import json
 
 global token_headers
 
@@ -27,7 +28,6 @@ class RunTest:
     def go_on_run(self):
 
         cookies_token_headers = self.loginToken.get_bind_workbench()
-        self.loginToken.get_add_patient()
         get_all_excel = self.data.get_excel_data()
         #   TODO 定义excel中行数据
         rows_count = self.data.rows
@@ -75,5 +75,5 @@ class RunTest:
 
 if __name__ == '__main__':
     a = RunTest()
-    a.go_on_run()
+    print(a.go_on_run())
 
